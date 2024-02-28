@@ -2,8 +2,8 @@
 
 namespace App\Livewire\Post;
 
-use App\Models\Post;
 use Livewire\Component;
+use App\Models\Post;
 
 class Add extends Component
 {
@@ -13,13 +13,12 @@ class Add extends Component
     {
         return view('livewire.post.add');
     }
-    public function save ()
-    {
+    public function save(){
         $input = $this->validate([
-            'title' => 'required' ,
+            'title' => 'required',
             'content' => 'required'
         ]);
-        $post = new Post ();
+        $post = new Post();
         $post->title = $this->title;
         $post->content = $this->content;
         try {
@@ -27,11 +26,9 @@ class Add extends Component
             $this->reset();
             session()->flash('msg',__('Post Saved Successfully'));
             session()->flash('alert','success');
-        } catch (\Throwable $th) {
+        }catch (\Throwable $th){
             session()->flash('msg',$th);
-            session()->flash('alert', 'danger');
-
+            session()->flash('alert','danger');
         }
-
     }
 }
